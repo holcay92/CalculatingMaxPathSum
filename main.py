@@ -13,19 +13,26 @@ def is_prime(number):
     return is_prime_number
 
 
-def recursive_sum(tri, m, n):
+def recursive_sum(tri, row, col):
     # loop for calculation
     maxSum = tri[0][0]
-    for i in range(0, m-1, 1):
-        for j in range(i + 1):
+    for i in range(0, row - 1, 1):
+        iterRow = i
+        for j in range(0, i + 1):
             if not is_prime(tri[i + 1][j]):
                 tri[i][j] += tri[i + 1][j]
             elif not is_prime(tri[i + 1][j+1]):
                 tri[i][j] += tri[i + 1][j+1]
-        tempSum = tri[i][j]
-        if tempSum > maxSum: maxSum = tempSum
+            ++iterRow
+            print("tempSum .", tri[i][j])
+            tempSum = tri[i][j]
+            if tempSum > maxSum: maxSum = tempSum
 
     return maxSum
+# 1
+# 8 4
+# 2 6 9
+# 8 7 2 4
 
 
 def main():
