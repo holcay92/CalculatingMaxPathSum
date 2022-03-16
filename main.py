@@ -24,8 +24,7 @@ def recursive_sum(tri, m, n):
                 tri[i][j] += tri[i + 1][j+1]
         tempSum = tri[i][j]
         if tempSum > maxSum: maxSum = tempSum
-    # return the top element
-    # which stores the maximum sum
+
     return maxSum
 
 
