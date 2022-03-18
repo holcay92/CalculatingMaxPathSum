@@ -13,17 +13,17 @@ def is_prime(number):
     return is_prime_number
 
 
-def recursive_sum(tri, i, j, row):
+def recursive_sum(pyramid, i, j, row):
     if i == row:
         return 0
     else:
-        return tri[i][j] + max_of(recursive_sum(tri, i+1, j, row), recursive_sum(tri, i+1, j+1, row))
+        return pyramid[i][j] + max_of(recursive_sum(pyramid, i+1, j, row), recursive_sum(pyramid, i+1, j+1, row))
 
 def main():
     with open('input.txt', 'r') as file:
         twoDlist = [[int(x) for x in line.split()] for line in file]
 
-    # number of rows
+# number of rows
     row = len(twoDlist)
     maxSum = 0
 
@@ -32,10 +32,9 @@ def main():
         for j in range(0, i+1):
             if twoDlist[i][j] != None and is_prime(twoDlist[i][j]): twoDlist[i][j] = float('-inf')
 
-    #print(twoDlist)
-# calling recursive function
+#checking if the starting number prime or not
     if twoDlist[0][0] == float('-inf'): return print("There is no path")
-
+# calling recursive function
     maxSum = recursive_sum(twoDlist, 0, 0, row)
     print(maxSum)
 
