@@ -1,3 +1,4 @@
+https://dpaste.com/BRF4S6K5H
 def max_of(number1: int, number2: int):
     if number1 < number2: return number2
     else: return number1
