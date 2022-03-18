@@ -1,49 +1,61 @@
-# number = int(input("enter number"))
-# print(int(number / 2))
-#
-#
-# def is_prime(number):
-#     if number == 1 or number == 0 or number == -1: return False
-#     if number == 2: return True
-#     if number == 4: return False
-#     is_prime_number = True
-#     for i in range(2, int(number / 2)):
-#         if number % i == 0: is_prime_number = False
-#     return is_prime_number
-#
-#
-# result = is_prime(number)
-# print(result)
-N = 3
+import math
+def max_of(number1: int, number2: int):
+    if number1 < number2: return number2
+    else: return number1
 
 
-# Function for finding maximum sum
-def maxPathSum(tri, m, n):
-    # loop for bottom-up calculation
-    for i in range(m - 1, -1, -1):
-        for j in range(i + 1):
-
-            # for each element, check both
-            # elements just below the number
-            # and below right to the number
-            # add the maximum of them to it
-            if tri[i + 1][j] > tri[i + 1][j + 1]:
-                tri[i][j] += tri[i + 1][j]
-            else:
-                tri[i][j] += tri[i + 1][j + 1]
-
-    # return the top element
-    # which stores the maximum sum
-    return tri[0][0]
+def is_prime(number):
+    if number == 1 or number == 0 or number == -1: return False
+    if number == 2: return True
+    if number == 4 or number == -4: return False
+    is_prime_number = True
+    for i in range(2, int(number / 2)):
+        if number % i == 0: is_prime_number = False
+    return is_prime_number
 
 
-# Driver program to test above function
+def recursive_sum(tri, i, j):
 
-tri = [[1],
-       [4, 8],
-       [5, 3, 1],
-       [2, 4, 1, 9]]
-print(maxPathSum(tri, 3, 3))
+    if i == len(tri):
+        return 0
+    else:
+        # print("max of the line:", max_of(recursive_sum(tri, i+1, j),
+        #   recursive_sum(tri, i+1, j+1)), "recursive_sum(tri, i+1, j): ", recursive_sum(tri, i+1, j),
+        #  "recursive_sum(tri, i+1, j+1): ", recursive_sum(tri, i+1, j+1))
+        return tri[i][j] + max_of(recursive_sum(tri, i+1, j), recursive_sum(tri, i+1, j+1))
 
-# This code is contributed
-# by Soumen Ghosh.
+
+# 1
+# 8 4
+# 2 6 9
+# 8 7 2 4
+
+
+def main():
+    with open('input.txt', 'r') as file:
+        twoDlist = [[int(x) for x in line.split()] for line in file]
+
+    # number of rows
+    row = col = len(twoDlist)
+    maxSum = 0
+# filling array with zeros
+#     iterColumn = 1
+#     for item1 in range(0, row):
+#         for item2 in range(0, row-iterColumn):
+#             twoDlist[item1].append(int(0))
+#         iterColumn = iterColumn + 1
+
+#removing prime numbers
+    for i in range(0, row):
+        for j in range(0, i+1):
+            if twoDlist[i][j] != None and is_prime(twoDlist[i][j]): twoDlist[i][j] = float('-inf')
+
+    print(twoDlist)
+# calling recursive function
+    if twoDlist[0][0] == float('-inf'): return print("There is no path")
+    maxSum = recursive_sum(twoDlist, 0, 0)
+    print("maxSum: ", maxSum)
+
+
+if __name__ == "__main__":
+    main()
