@@ -38,4 +38,4 @@ According to assignment in 3 that you implemented what is the maximum sum of bel
 
 
 ### In this project,
-After getting inputs from the input file, i checked the prime numbers and turned them to (-infinity) to eliminate them being on the max path. Then in the recursive_sum function it repeatedly goes to the next bigger node and finally gives the maximum path summation.
+After getting inputs from the input file, i checked the prime numbers and turned them to (-infinity) to eliminate them being on the max path. Then in the recursive_sum function it repeatedly goes to the next bigger node until it faces a None-existing node and finally gives the maximum path summation.
