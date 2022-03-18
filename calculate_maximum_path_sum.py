@@ -19,22 +19,23 @@ def recursive_sum(pyramid, i, j, row):
     else:
         return pyramid[i][j] + max_of(recursive_sum(pyramid, i+1, j, row), recursive_sum(pyramid, i+1, j+1, row))
 
+
 def main():
     with open('input.txt', 'r') as file:
         twoDlist = [[int(x) for x in line.split()] for line in file]
 
-# number of rows
+    # number of rows
     row = len(twoDlist)
     maxSum = 0
 
-#removing prime numbers by making them infinity
+    # removing prime numbers by making them infinity
     for i in range(0, row):
         for j in range(0, i+1):
             if twoDlist[i][j] != None and is_prime(twoDlist[i][j]): twoDlist[i][j] = float('-inf')
 
-#checking if the starting number prime or not
+    # checking if the starting number prime or not
     if twoDlist[0][0] == float('-inf'): return print("There is no path")
-# calling recursive function
+    # calling recursive function
     maxSum = recursive_sum(twoDlist, 0, 0, row)
     print(maxSum)
 
